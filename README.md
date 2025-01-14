@@ -39,13 +39,11 @@ internal class Program
             Console.Write($"OldPhonePad => ");
             string input = Console.ReadLine();
 
-            // Check if user wants to exit
             if (input.ToUpper() == "EXIT")
             {
                 break;
             }
 
-            // Ensure "#" is always at the end of the input
             if (!input.EndsWith("#"))
             {
                 input += "#";
