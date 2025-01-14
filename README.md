@@ -1,44 +1,14 @@
 # Summary of OldPhonePadProject
 The `OldPhonePadProject` uses a multi-tap input mechanism to mimic how texting might behave on an outdated mobile phone. On a conventional mobile phone, each number is associated with a group of letters (for example, 2 = ABC, 3 = DEF). Using the outdated mobile keypad technology, this project lets the user enter numerical sequences, which the application then translates into letters.
 
-The application also manages special characters:
-
-- `*` which functions similarly to a backspace, is used to remove the previous character.
-- `#` denotes that the input has ended.
-
 ### Features
-- Multi-tap text input simulation based on old phone keypads.
-- Handles backspace using the * character.
-- Stops processing when # is encountered.
+- Converts a sequence of digits into text using old mobile keypad mappings.
+- * key acts as a backspace, removing the previous character.
+- Automatically adds the # at the end of the input if not provided by the user.
 - Continuously accepts input until the user types exit.
+- Exit Condition: The user can exit the program by typing "EXIT".
 
-### Example Usage
 
-```csharp
- static void Main(string[] args)
- {
-     Console.WriteLine("Enter 'exit' to exit program: ");
-     while (true)
-     {
-         Console.Write($"OldPhonePad => ");
-         string input = Console.ReadLine();
-
-         if (input.ToUpper() == "EXIT")
-         {
-             break;
-         }
-
-         if (!input.EndsWith("#"))
-         {
-             input += "#";
-         }
-
-         string result = OldPhone.OldPhonePad(input);
-         Console.WriteLine($"OldPhonePad({input}) => output: " + result);
-         
-     }
- }
-```
 ## Key Mappings
 
 | Key | Characters       |
@@ -55,3 +25,83 @@ The application also manages special characters:
 | 9   | WXYZ             |
 | *   | Backspace        |
 | #   | End of Input     |
+
+### Example Usage
+
+```csharp
+internal class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Enter 'exit' to exit program: ");
+        while (true)
+        {
+            Console.Write($"OldPhonePad => ");
+            string input = Console.ReadLine();
+
+            // Check if user wants to exit
+            if (input.ToUpper() == "EXIT")
+            {
+                break;
+            }
+
+            // Ensure "#" is always at the end of the input
+            if (!input.EndsWith("#"))
+            {
+                input += "#";
+            }
+
+            string result = OldPhone.OldPhonePad(input);
+            Console.WriteLine($"OldPhonePad({input}) => output: " + result);
+        }
+    }
+}
+
+public class OldPhone
+{
+    private static readonly string[] _keyWord = new string[] { " ", "&'(", "ABC", "DEF", "GHI", "JKL", "MNO", "PQRS", "TUV", "WXYZ" };
+
+    public static string OldPhonePad(string input)
+    {
+        var output = new StringBuilder();
+        for (int i = 0; i < input.Length; i++)
+        {
+            char charKey = input[i];
+            if (char.IsDigit(charKey))
+            {
+                int keyIndex = charKey - '0';
+                int charCount = 0;
+                while (i < input.Length && input[i] == charKey)
+                {
+                    charCount++;
+                    i++;
+                }
+                i--;
+                int charIndex = (charCount - 1) % _keyWord[keyIndex].Length;
+                output.Append(_keyWord[keyIndex][charIndex]);
+            }
+            else if (charKey == '*')
+            {
+                if (output.Length > 0)
+                {
+                    output.Remove(output.Length - 1, 1);
+                }
+            }
+            else if (charKey == '#')
+            {
+                break;
+            }
+        }
+        return output.ToString();
+    }
+}
+```
+## Example Input and Output
+
+- Input: `4433555 555666#`
+  - Output: `HELLO`
+
+- Input: `8 88777444666*664#`
+  - Output: `TURING`
+
+
