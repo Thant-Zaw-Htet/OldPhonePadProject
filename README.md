@@ -3,7 +3,6 @@ The `OldPhonePadProject` uses a multi-tap input mechanism to mimic how texting m
 
 ### Features
 - Converts a sequence of digits into text using old mobile keypad mappings.
-- * key acts as a backspace, removing the previous character.
 - Automatically adds the # at the end of the input if not provided by the user.
 - Continuously accepts input until the user types exit.
 - Exit Condition: The user can exit the program by typing "EXIT".
