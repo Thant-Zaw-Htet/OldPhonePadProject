@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace OldPhonePadProject
 {
@@ -16,21 +13,38 @@ namespace OldPhonePadProject
                 Console.Write($"OldPhonePad => ");
                 string input = Console.ReadLine();
 
-                string result = OldPhone.OldPhonePad(input);
-                Console.WriteLine("Output: " + result);
-
-
                 if (input.ToUpper() == "EXIT")
                 {
                     break;
                 }
+
+                if (!input.EndsWith("#"))
+                {
+                    input += "#";
+                }
+
+                string result = OldPhone.OldPhonePad(input);
+                Console.WriteLine($"OldPhonePad({input}) => output: " + result);
+                
             }
         }
     }
 
-    public class OldPhone
+    public  class OldPhone
     {
-        private static readonly string[] _keyWord = new string[] { " ", "&'(", "ABC", "DEF", "GHI", "JKL", "MNO", "PQRS", "TUV", "WXYZ" };
+        private static readonly string[] KeyMappings = new string[]
+        {
+            " ",    //is 0
+            "&'(",  //is 1
+            "ABC",  //is 2
+            "DEF",  //is 3
+            "GHI",  //is 4
+            "JKL",  //is 5
+            "MNO",  //is 6
+            "PQRS", //is 7
+            "TUV",  //is 8
+            "WXYZ"  //is 9
+        };
 
         public static string OldPhonePad(string input)
         {
@@ -48,8 +62,9 @@ namespace OldPhonePadProject
                         i++;
                     }
                     i--;
-                    int charIndex = (charCount - 1) % _keyWord[keyIndex].Length;
-                    output.Append(_keyWord[keyIndex][charIndex]);
+
+                    int charIndex = (charCount - 1) % KeyMappings[keyIndex].Length;
+                    output.Append(KeyMappings[keyIndex][charIndex]);
                 }
                 else if (charKey == '*')
                 {
