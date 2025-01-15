@@ -133,4 +133,4 @@ To ensure the correct functionality of the `OldPhonePad` method, we can write un
    ```bash
    Install-Package MSTest.TestFramework
 
-![Successful Unit Tests]([https://github.com/GhostDevelopment69/OldPhonePadCodingChallenge/blob/master/TestSuccess.png?raw=true](https://github.com/Thant-Zaw-Htet/OldPhonePadProject/blob/master/OldPhonePadProject.Tests/TestSuccess.png))
+![Successful Unit Tests](OldPhonePadProject.Tests/TestSuccess.png)
