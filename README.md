@@ -122,4 +122,15 @@ namespace OldPhonePadProject
 - Input: `8 88777444666*664#`
   - Output: `TURING`
 
+## Unit Tests
 
+To ensure the correct functionality of the `OldPhonePad` method, we can write unit tests using the `Microsoft.VisualStudio.TestTools.UnitTesting` framework.
+
+### Steps to Run Unit Tests
+
+1. **Install MSTest**:
+   If you haven't already, you can install the MSTest NuGet package in your project using the following command in the NuGet Package Manager Console:
+   ```bash
+   Install-Package MSTest.TestFramework
+
+![Successful Unit Tests]([https://github.com/GhostDevelopment69/OldPhonePadCodingChallenge/blob/master/TestSuccess.png?raw=true](https://github.com/Thant-Zaw-Htet/OldPhonePadProject/blob/master/OldPhonePadProject.Tests/TestSuccess.png))
